@@ -24,7 +24,7 @@ const matar ={1: " was slain by ",
               4: " was pummeled by ",
               5: " was killed by ",
               6: " was brutally murdered by ",
-              7: " was spared from death by "
+              7: " was spared gracefully from death by "
 
 };
 const keys = Object.keys(muertes);
@@ -44,10 +44,7 @@ client.on("message", (message) => {
 function process(message){
     var texto = message.content.toLowerCase();
     var channel = message.channel;
-    if(!channel.name.includes('canal_prueba')){
-        return;
-    }
-    if(texto.includes('help') || texto.includes('ayuda')){
+    if(texto.includes('help') || texto.includes('ayuda') || texto.includes('rules')){
         const e = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('QUE PUEDES HACER?')
@@ -55,7 +52,8 @@ function process(message){
         .addFields(
             { name: 'YEAH PERDONEN', value: 'EL HIMNO' },
             { name: 'COIN/MONEDA/FLIP', value: 'LANZA UNA MONEDA' },
-            { name: 'BLAME', value: 'MATA A ALGUIEN(EN PROCESO)' },
+            { name: 'DIE', value: 'TE MUERES' },
+            { name: 'KILL', value: 'MATAS A ALGUIEN' },
             { name: 'NOMBRE/POBLACIÓN', value: 'INFO DEL SERVER' },
             { name: 'DEFINICION', value: 'SI' },
         )
@@ -63,6 +61,24 @@ function process(message){
         .setTimestamp()
         .setFooter('MM PATAS');
         channel.send(e);
+    }else if(texto.includes('kys')){
+        channel.send('kys mejor a tu madre, ' + message.author.username);
+    }else if(texto.includes('josé')){
+        var cumple = new Date("May 12, 2020 01:00:00").getTime();
+        var now = new Date().getTime();
+        var delta = cumple - now;
+        var days = Math.floor(delta/ (1000 * 60 * 60 * 24));
+        var hours = Math.floor((delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((delta % (1000 * 60)) / 1000);
+        var felicidad = 'Faltan '+ days + ' días ' + hours + ' horas ' +  + minutes + ' minutos ' + seconds +  ' segundos ' + ' para tu cumpleaños';
+        channel.send(felicidad);
+        channel.send('feliz cumpleaños :)');
+    }else if(texto.includes('kick')){
+        const taggedUser = message.mentions .users.first();
+        const objetivo = taggedUser.username;
+        const userName = message.author.username;
+        channel.send('Estás seguro que quieres decirle ayosh popó a? ' + objetivo);
     }
     else if(texto.includes('definicion')){
         const e = new Discord.MessageEmbed()
@@ -92,7 +108,7 @@ function process(message){
         var pop = message.guild.memberCount;
         channel.send('Habitantes del server: ' + pop);
     }else if (texto.includes('die')){
-        var random = Math.floor(Math.random() * 11 ) + 1;
+        var random = Math.floor(Math.random() * 12 ) + 1;
         channel.send(random)
         for (const key in keys){
             if(key == random){
@@ -104,7 +120,7 @@ function process(message){
     }else if (texto.includes('kill')){
         const taggedUser = message.mentions .users.first();
         const objetivo = taggedUser.username;
-        var random = Math.floor(Math.random() * 6 ) + 1;
+        var random = Math.floor(Math.random() * 7 ) + 1;
         channel.send(random)
         for (const key in llaves){
             if(key == random){
@@ -135,8 +151,7 @@ function process(message){
         channel.send('hola como estás')
     }else if (texto.includes('bien') || texto.includes('mal')){
         channel.send('didnt ask tbh');
-    }
-    else{
+    }else{
         channel.send("FUNNY FUNNY FUNNY no te entendí")
     }    
 }
