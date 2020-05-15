@@ -109,7 +109,6 @@ function process(message){
         channel.send('Habitantes del server: ' + pop);
     }else if (texto.includes('die')){
         var random = Math.floor(Math.random() * 12 ) + 1;
-        channel.send(random)
         for (const key in keys){
             if(key == random){
                 var respuesta = muertes[key]
@@ -121,7 +120,6 @@ function process(message){
         const taggedUser = message.mentions .users.first();
         const objetivo = taggedUser.username;
         var random = Math.floor(Math.random() * 7 ) + 1;
-        channel.send(random)
         for (const key in llaves){
             if(key == random){
                 var respuesta = matar[key]
